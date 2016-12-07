@@ -17,24 +17,23 @@ import com.niit.model.Blog;
 
 @RestController
 public class BlogController {
-
 @Autowired
 private BlogDAO blogDAO;
+
 
 @PostMapping(value="/createblog")
 public ResponseEntity<Blog> addblog(@RequestBody Blog blog){
 	System.out.println("hello");
 	blogDAO.saveOrUpdate(blog);
-	return new ResponseEntity<Blog>(blog,HttpStatus.OK);	
+	return new ResponseEntity<Blog>(blog,HttpStatus.OK);
+	
 }
-
 @GetMapping(value="/blog")
 public ResponseEntity<List<Blog>> listblog(){
 	System.out.println("list of blog");
 	List<Blog> blog =blogDAO.list();
 	return new ResponseEntity<List<Blog>>(blog,HttpStatus.OK);
 }
-
 @DeleteMapping(value="/deleteblog/{blogid}")
 public ResponseEntity<Blog> deleteblog(Blog blog,@PathVariable("blogid") int blogid){
 	Blog blog1=blogDAO.get(blogid);
