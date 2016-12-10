@@ -17,13 +17,9 @@ public class UserDAOImpl implements UserDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	
-	
 	public UserDAOImpl(SessionFactory sessionFactory) {
 		this.sessionFactory=sessionFactory;
 	}
-	
-	
 	@Transactional
 	public boolean saveOrUpdate(User user) {
 		try {
@@ -49,21 +45,17 @@ public class UserDAOImpl implements UserDAO {
 	}
 	@SuppressWarnings({ "deprecation", "unchecked" })
 	@Transactional
-	public List<User> getAllUsers() {
+	public List<User> list() {
 		Criteria c=sessionFactory.getCurrentSession().createCriteria(User.class);
-		List<User> list = c.list();
+		List<User> list=c.list();
 		return list;
-		
-	/*	String hql = "from User" ;
-		Query query=sessionFactory.getCurrentSession().createQuery(hql);
-		return query.list();*/
 	}
-
+	
 	@Transactional
 	public User get(int id) {
-		String hql = "from User where userid= "+ "'"+ id+"'" ;
+		String hql = "from User where id= "+ "'"+ id+"'" ;
 		Query query=sessionFactory.getCurrentSession().createQuery(hql);
-		List<User> list = query.list();
+		List<User>list= query.list();
 		
 		if(list==null)
 		{
@@ -73,8 +65,51 @@ public class UserDAOImpl implements UserDAO {
 		{
 			return list.get(0);
 		}
+	}
+	public List<User> getuser(int id) {
+		String hql = "from User where id= "+ "'"+ id+"'" ;
+		Query query=sessionFactory.getCurrentSession().createQuery(hql);
+		List<User>list= query.list();
 		
-		/*return (User) sessionFactory.getCurrentSession().get(User.class , id);*/
+		if(list==null)
+		{
+			return null;
+		}
+		else
+		{
+			return list;
+		}
+	
+	}		
+	
+	@SuppressWarnings({ "rawtypes", "deprecation", "unchecked" })
+	@Transactional
+	public User authuser(String username, String password) {
+		String hql="from User where username= "+"'"+username+"'"+"and password= "+"'"+password+"'";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List<User>list=query.list();
+		if(list==null)
+		{
+			return null;
+		}
+		else
+		{
+			return list.get(0);
+		}
+	}
+	@Transactional
+	public User logout(int id) {
+		String hql = "from User where id= "+ "'"+ id+"'" ;
+		Query query=sessionFactory.getCurrentSession().createQuery(hql);
+		List<User>list= query.list();
 		
+		if(list==null)
+		{
+			return null;
+		}
+		else
+		{
+			return list.get(0);
+		}
 	}
 }

@@ -1,5 +1,7 @@
 package com.niit.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,28 +16,20 @@ public class User {
 	
 	@Id
 	@GeneratedValue
-	private int userid;
+	private int id;
 	private String username;
+	private String role;
+	private String email;
 	private String password;
 	private String confirmpassword;
-	private String email;
-	private String phone;
-	private String role;
-	/*private boolean enabled;*/
-	
-	
-	public String getRole() {
-		return role;
+	private int  phone;
+	private String address;
+	private Date dob;
+	public int getId() {
+		return id;
 	}
-	public void setRole(String role) {
-		this.role = role;
-	}
-	
-	public int getUserid() {
-		return userid;
-	}
-	public void setUserid(int userid) {
-		this.userid = userid;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getUsername() {
 		return username;
@@ -43,35 +37,62 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	public String getMail() {
+		return email;
+	}
+	public void setMail(String mail) {
+		this.email = mail;
+	}
 	public String getPassword() {
 		return password;
+	}
+	
+	public String confirmPassword() {
+		return confirmpassword;
 	}
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getConfirmpassword() {
-		return confirmpassword;
-	}
-	public void setConfirmpassword(String confirmpassword) {
-		this.confirmpassword = confirmpassword;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getPhone() {
+	public int getMobile() {
 		return phone;
 	}
-	public void setPhone(String phone) {
+	public void setMobile(int mobile) {
 		this.phone = phone;
 	}
-	/*public boolean isEnabled() {
-		return enabled;
+	public String getAddress() {
+		return address;
 	}
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}*/
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public Date getDob() {
+		return dob;
+	}
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public char getStatus() {
+		return status;
+	}
+	public void setStatus(char status) {
+		this.status = status;
+	}
+	private String gender;
+	private char status;
+	
+	
+	
 	
 }

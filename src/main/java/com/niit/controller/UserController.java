@@ -19,26 +19,28 @@ public class UserController {
 
 	@Autowired
 	private UserDAO userDAO;
+
+
+@PostMapping(value="/register")
+public ResponseEntity<User> adduser(@RequestBody User user){
+	System.out.println("hello");
+	userDAO.saveOrUpdate(user);
+	return new ResponseEntity<User>(user, HttpStatus.OK);
 	
-	@PostMapping(value="/register")
-	public ResponseEntity<User> adduser(@RequestBody User user){
-		System.out.println("hello");
-		userDAO.saveOrUpdate(user);
-		return new ResponseEntity<User>(user, HttpStatus.OK);
-		
-	}
-	@GetMapping(value="/users")
-	public ResponseEntity<List<User>> listuser(){
-		System.out.println("list of users");
-		List<User> user1 =userDAO.getAllUsers();
-		return new ResponseEntity<List<User>>(user1,HttpStatus.OK);
-		
-	}
-	
-	@DeleteMapping(value="/deleteuser/{userid}")
-	public ResponseEntity<User> deleteuser(User user,@PathVariable("userid") int userid){
-		User users1=userDAO.get(userid);
-		userDAO.delete(users1);
-		return new ResponseEntity<User>(user,HttpStatus.OK);
 }
+@GetMapping(value="/user")
+public ResponseEntity<List<User>> listuser(){
+	System.out.println("list of user");
+	List<User> user1 =userDAO.list();
+	return new ResponseEntity<List<User>>(user1,HttpStatus.OK);
+	
+	
+}
+@DeleteMapping(value="/deleteuser/{id}")
+public ResponseEntity<User> deleteblog(User user,@PathVariable("id") int id){
+	User user1=userDAO.get(id);
+	userDAO.delete(user);
+	return new ResponseEntity<User>(user,HttpStatus.OK);
+}
+
 }
