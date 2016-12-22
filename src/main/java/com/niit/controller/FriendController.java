@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -51,9 +52,11 @@ private List<Friend> Users;
 
 public ResponseEntity<Friend> sendrequest(@PathVariable("fid") String fid,HttpSession session)
 {
+	String userid=(String) session.getAttribute("username");
+
 	
-	String username=(String) session.getAttribute("username");
-	friend.setUserid(username);
+	/*String username=(String) session.getAttribute("username");*/
+	friend.setUserid(userid);
 	friend.setFriendid(fid);
 	friend.setStatus('n');
 	friendDAO.save(friend);
@@ -92,14 +95,18 @@ public ResponseEntity<Friend> acceptfriend(@PathVariable("fid") String fid,HttpS
 
 @RequestMapping(value="/rejectfriend/{fid}",method=RequestMethod.POST)
 
-public void rejectfriend(@PathVariable("fid") String fid,HttpSession session)
+public ResponseEntity<Friend> rejectfriend(@PathVariable("fid") String fid,HttpSession session)
 
 	{
 
 	String uid=(String) session.getAttribute("username");
 	Friend friend=friendDAO.acceptfriend(fid, uid);
-	friend.setStatus('r');
+	//Friend friend1=friendDAO.acceptfriend(id, fid);
+	friend.setStatus('r');	//friend.setStatus('r');
 	friendDAO.update(friend);
+	//friendDAO.update(friend1);
+	return new ResponseEntity<Friend>(HttpStatus.OK);
+
 	
 	}
 
@@ -116,8 +123,33 @@ public void unfriend(@PathVariable("fid") String fid,HttpSession session)
 	friendDAO.update(friend1);
 	
 }
-	
+@GetMapping
+(value="/newrequests")
+public ResponseEntity<List<Friend>> newrequests(HttpSession session){
+	String uid=(String) session.getAttribute("username");
+	List<Friend> list=friendDAO.getrequestlist(uid);
+	return new ResponseEntity<List<Friend>>(list,HttpStatus.OK);
+}
 
+
+/*@RequestMapping(value="/acceptrequest/{fid}")
+public ResponseEntity<Friend> acceptFriendFriendRequest(@PathVariable("fid")String fid, HttpSession session) {
+
+	String uid=(String)session.getAttribute("username");
+	Friend friend=friendDAO.acceptfriend(uid, fid);
+	saveOrUpdate(fid,"A");
+	friend.setStatus('a');
+	friendDAO.update(friend);
+	Friend friend1=new Friend();
+	friend1.setUserid(uid);
+	friend1.setFriendid(fid);
+	friend1.setStatus('a');
+	friendDAO.save(friend1);
+
+	return new ResponseEntity<Friend>(friend, HttpStatus.OK);
+	
+}
+*/
 
 
 

@@ -157,7 +157,7 @@ public class FriendDAOImpl implements FriendDAO
 		{
 			return list.get(0);
 		}
-		}
+	}
 
 	@Transactional
 	public List<Friend> getrequestlist(String uid) {

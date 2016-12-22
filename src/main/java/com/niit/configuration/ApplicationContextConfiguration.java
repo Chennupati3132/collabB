@@ -15,9 +15,20 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import com.niit.DAO.BlogDAO;
 import com.niit.DAO.BlogDAOImpl;
+import com.niit.DAO.ForumDAO;
+import com.niit.DAO.ForumDAOImpl;
+import com.niit.DAO.FriendDAO;
+import com.niit.DAO.FriendDAOImpl;
+import com.niit.DAO.JobDAO;
+import com.niit.DAO.JobDAOImpl;
+import com.niit.DAO.UserDAO;
+import com.niit.DAO.UserDAOImpl;
 import com.niit.model.Blog;
 import com.niit.model.Forum;
+import com.niit.model.Friend;
+import com.niit.model.Job;
 import com.niit.model.User;
 
 @Configuration
@@ -97,5 +108,5 @@ public JobDAO getJobDAO(SessionFactory sessionFactory){
 public FriendDAO getFriendDAO(SessionFactory sessionFactory){
 	
 	return new FriendDAOImpl(sessionFactory);
-}s
+}
 }*/

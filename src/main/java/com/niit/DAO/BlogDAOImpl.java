@@ -47,7 +47,7 @@ public class BlogDAOImpl implements BlogDAO {
 	@Transactional
 	public List<Blog> list() {
 		Criteria c=sessionFactory.getCurrentSession().createCriteria(Blog.class);
-		List<Blog> list=c.list();
+		List<Blog> list = c.list();
 		return list;
 		
 		/*String hql = "from Blog" ;

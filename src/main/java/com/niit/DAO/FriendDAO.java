@@ -2,8 +2,9 @@ package com.niit.DAO;
 
 import java.util.List;
 
-import com.niit.model.Forum;
 import com.niit.model.Friend;
+
+
 
 public interface FriendDAO
 
